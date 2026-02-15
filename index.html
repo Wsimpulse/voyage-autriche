@@ -341,104 +341,142 @@
             </div>
         </section>
 
-        <!-- Section 2: Timeline Itinerary -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-2">
-                <span class="bg-sky-100 text-sky-600 p-2 rounded-lg text-xl">📅</span>
-                Chronologie du Séjour
+        <!-- Section 2: Logistique & Trajets (Stopovers) -->
+        <section class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-4 border-indigo-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <span class="bg-indigo-100 text-indigo-600 p-2 rounded-lg text-xl">🚗</span>
+                Partie 1 : Logistique et Trajets
             </h2>
+            <p class="text-gray-600 mb-6 italic">Le trajet total étant long, le découper est indispensable, surtout avec
+                des enfants.</p>
 
-            <div class="relative timeline-line space-y-8">
-                <!-- Timeline Steps -->
-                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
-                    <div
-                        class="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
-                        08</div>
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-indigo-500">
-                        <h3 class="font-bold text-lg text-indigo-700">Départ & Etape 1</h3>
-                        <p class="text-sm text-gray-600">Trets ➔ Lac de Garde / Vérone</p>
-                    </div>
-                    <div class="hidden md:block w-5/12"></div>
-                </div>
-
-                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
-                    <div class="hidden md:block w-5/12"></div>
-                    <div
-                        class="bg-sky-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
-                        09</div>
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 mr-auto md:mr-0 border-t-4 border-sky-500">
-                        <h3 class="font-bold text-lg text-sky-700">Arrivée Thalgau</h3>
-                        <p class="text-sm text-gray-600">Vérone ➔ Thalgau (Salzbourg)</p>
+            <div class="space-y-8">
+                <!-- Etape 1 Aller -->
+                <div class="relative pl-8 border-l-2 border-indigo-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-indigo-600 ring-4 ring-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2">🚀 Étape 1 : Aller (08/08/2026)</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm text-gray-700">
+                        <p><strong>Trajet :</strong> Trets (13) ➔ Direction Thalgau ("Via Nice, Gênes, Vérone").</p>
+                        <p><strong>Temps de route :</strong> ~6h30 - 7h00 jusqu'à l'étape.</p>
+                        <div class="mt-3 bg-white p-3 rounded border border-indigo-100 shadow-sm">
+                            <h4 class="font-semibold text-indigo-600 mb-1">📍 Point d'arrêt : Vérone (Italie)</h4>
+                            <p><strong>Hôtel :</strong> B&B Hotel Verona</p>
+                            <p class="text-xs text-gray-500">Adresse : Via Enrico Fermi 13/b, Borgo Roma, 37135 Vérone.
+                            </p>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500">Reste pour le lendemain (J2) : ~4h00 jusqu'à Thalgau.</p>
                     </div>
                 </div>
 
-                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
-                    <div
-                        class="bg-emerald-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
-                        15</div>
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-emerald-500">
-                        <h3 class="font-bold text-lg text-emerald-700">Transition Tyrol</h3>
-                        <p class="text-sm text-gray-600">Thalgau ➔ Neustift im Stubaital</p>
+                <!-- Etape 2 Retour -->
+                <div class="relative pl-8 border-l-2 border-amber-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-amber-600 ring-4 ring-white"></div>
+                    <h3 class="text-xl font-bold text-amber-800 mb-2">🏠 Étape 2 : Retour (21/08/2026)</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm text-gray-700">
+                        <p><strong>Trajet :</strong> Neustift im Stubaital ➔ Direction Trets (Par col du Brenner).</p>
+                        <p><strong>Temps de route :</strong> ~4h30 jusqu'à l'étape.</p>
+                        <div class="mt-3 bg-white p-3 rounded border border-amber-100 shadow-sm">
+                            <h4 class="font-semibold text-amber-600 mb-1">📍 Point d'arrêt : Crémone (Italie)</h4>
+                            <p><strong>Hôtel :</strong> B&B Hotel Cremona</p>
+                            <p class="text-xs text-gray-500">Adresse : Via Antiche Fornaci 70, 26100 Crémone.</p>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500">Reste pour le lendemain (J2) : ~5h00 jusqu'à Trets.</p>
                     </div>
-                    <div class="hidden md:block w-5/12"></div>
-                </div>
-
-                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
-                    <div class="hidden md:block w-5/12"></div>
-                    <div
-                        class="bg-amber-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
-                        21</div>
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 mr-auto md:mr-0 border-t-4 border-amber-500">
-                        <h3 class="font-bold text-lg text-amber-700">Retour & Etape 2</h3>
-                        <p class="text-sm text-gray-600">Neustift ➔ Plaisance (Piacenza)</p>
-                    </div>
-                </div>
-
-                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
-                    <div
-                        class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
-                        22</div>
-                    <div
-                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-gray-600">
-                        <h3 class="font-bold text-lg text-gray-800">Retour Maison</h3>
-                        <p class="text-sm text-gray-600">Plaisance ➔ Trets</p>
-                    </div>
-                    <div class="hidden md:block w-5/12"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Hiking Analysis -->
-        <section>
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <span class="bg-emerald-100 text-emerald-600 p-2 rounded-lg text-xl">🥾</span>
-                    Challenge Randonnée
-                </h2>
-                <p class="text-gray-600 mt-2">
-                    Comparaison des distances et altitudes (Thalgau vs Neustift).
-                </p>
-            </div>
+        <!-- Zone 1: Thalgau & Salzkammergut -->
+        <section class="bg-white rounded-xl shadow-md p-6 md:p-8 border-t-4 border-sky-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <span class="text-3xl">🏔️</span> Zone 1 : Thalgau & Salzkammergut (09/08 - 15/08)
+            </h2>
+            <p class="text-gray-600 mb-6">Thalgau est la porte d'entrée de la région des lacs. C'est sublime.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Distances Chart -->
-                <div class="bg-white rounded-xl shadow-md p-6">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Distances (km)</h3>
-                    <div class="chart-container">
-                        <canvas id="hikingDistChart"></canvas>
+            <div class="space-y-6">
+                <!-- Hikes Zone 1 -->
+                <div>
+                    <h3 class="text-xl font-bold text-sky-700 mb-3">🥾 Randonnées (Adaptées 7-15km)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-sky-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-sky-900">Le Tour du Fuschlsee (Coup de ❤️)</h4>
+                            <p class="text-sm text-gray-700 mt-1"><strong>11-12 km (Facile)</strong> - Longe le lac
+                                turquoise, ombragé, baignade possible partout. Idéal porte-bébé.</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-sky-900">Alpage de Postalm</h4>
+                            <p class="text-sm text-gray-700 mt-1"><strong>8-9 km (Moyenne)</strong> - Le plus grand
+                                plateau d'Autriche. Vaches, chalets, fromage. 100% sécurisé pour les enfants.</p>
+                        </div>
+                        <div class="bg-sky-50 p-4 rounded-lg md:col-span-2">
+                            <h4 class="font-bold text-sky-900">Le Schafberg (Train à crémaillère)</h4>
+                            <p class="text-sm text-gray-700 mt-1">Vue sur les 5 lacs au sommet. Option : Train + marche
+                                depuis la station intermédiaire.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Altitude Context -->
-                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Profil d'Altitude</h3>
-                    <div class="chart-container flex-grow">
-                        <canvas id="altitudeChart"></canvas>
+                <!-- Visits Zone 1 -->
+                <div>
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">🏛️ Visites & Focus Hallstatt</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                        <li><strong>Salzbourg :</strong> Forteresse, Jardins Mirabell, maison de Mozart (20 min).</li>
+                        <li><strong>Hangar-7 (Red Bull) :</strong> Gratuit. Avions, F1. Top pour les enfants !</li>
+                        <li><strong>Nid d'Aigle :</strong> Vue panoramique historique à la frontière.</li>
+                    </ul>
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 flex items-center gap-2">💎 Focus Hallstatt</h4>
+                        <p class="text-sm text-gray-700 mt-2"><strong>Distance :</strong> 55km (1h). Dormez à Thalgau !
+                        </p>
+                        <p class="text-sm text-gray-700 mt-1"><strong>Stratégie :</strong> Arriver avant 8h30 ou après
+                            16h (foule). Parking P1 ou P2.</p>
+                        <p class="text-sm text-gray-700 mt-1"><strong>À voir :</strong> Mines de Sel (toboggans bois !)
+                            via le funiculaire.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zone 2: Neustift & Tyrol -->
+        <section class="bg-white rounded-xl shadow-md p-6 md:p-8 border-t-4 border-emerald-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <span class="text-3xl">🦅</span> Zone 2 : Neustift & Tyrol (15/08 - 21/08)
+            </h2>
+            <p class="text-gray-600 mb-6">Le Stubai et ses glaciers. Remontées gratuites avec la "Stubai Super Card".
+            </p>
+
+            <div class="space-y-6">
+                <!-- Hikes Zone 2 -->
+                <div>
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3">🥾 Randonnées</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-emerald-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-emerald-900">WildeWasserWeg</h4>
+                            <p class="text-sm text-gray-700 mt-1">Chemin de l'eau sauvage. Cascades spectaculaires,
+                                accessible poussette en bas (Grawa).</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-emerald-900">Schlick 2000 (Baumhausweg)</h4>
+                            <p class="text-sm text-gray-700 mt-1"><strong>LE sentier enfants (Fulpmes).</strong> Cabanes
+                                dans les arbres, tyroliennes. 5-6km en descente.</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg md:col-span-2">
+                            <h4 class="font-bold text-emerald-900">Mieders & Luge d'été</h4>
+                            <p class="text-sm text-gray-700 mt-1">Rando plateau Serles + Descente en luge la plus raide
+                                des Alpes !</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visits Zone 2 -->
+                <div>
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">🏛️ Visites Incontournables</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong>Top of Tyrol (Glacier) :</strong> Plateforme à 3210m. (Il fait froid !).</li>
+                        <li><strong>Innsbruck :</strong> Petit Toit d'Or, Alpenzoo (zoo le plus haut d'Europe).</li>
+                        <li><strong>Swarovski (Wattens) :</strong> Musée féerique, géant de verdure, jeux extérieurs.
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -451,60 +489,43 @@
                     Connectivité & Réseau
                 </h2>
                 <p class="text-gray-600 mt-2">
-                    Restez connectés pendant tout le voyage.
+                    L'Autriche est très bien couverte, même en montagne.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Roaming Info -->
                 <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-sky-500">
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">🇪🇺 Roaming UE (Gratuit)</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">📱 Roaming UE (Gratuit)</h3>
                     <p class="text-gray-600 text-sm mb-4">
-                        Grâce au principe "Roam Like at Home", votre forfait français fonctionne en Autriche
-                        <strong>sans surcoût</strong> (Appels, SMS, Internet).
+                        Vos forfaits français (Sosh, Free, Orange...) fonctionnent <strong>sans surcoût</strong>
+                        (Appels/Data).
                     </p>
                     <ul class="text-sm space-y-2 text-gray-600">
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> 4G/5G comme en France
-                        </li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> Pas de configuration
-                            requise</li>
-                        <li class="flex items-center gap-2"><span class="text-amber-500">⚠</span> Vérifiez votre "Fair
-                            Use" (quota data étranger)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> Partenaires : A1,
+                            Magenta, Drei.</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> A1 capte souvent mieux
+                            en montagne.</li>
                     </ul>
                 </div>
 
                 <!-- Coverage Details -->
                 <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-indigo-500">
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">📶 Couverture Mobile</h3>
-                    <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">📍 Couverture par Zone</h3>
+                    <div class="space-y-4 text-sm text-gray-700">
                         <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-semibold text-sm">Thalgau (Lacs)</span>
-                                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Excellent
-                                    (4G/5G)</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
-                            </div>
+                            <strong class="text-indigo-700 block">Thalgau :</strong>
+                            Excellente (5G/4G+). Wifi logement souvent très rapide (Salzburg AG), OK pour
+                            streaming/télétravail.
                         </div>
                         <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-semibold text-sm">Neustift (Village)</span>
-                                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Très Bon (4G)</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
-                            </div>
+                            <strong class="text-emerald-700 block">Neustift (Vallée) :</strong>
+                            Très bonne (4G+/5G). Logements souvent équipés fibre/VDSL.
                         </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-semibold text-sm">Glaciers / Rando</span>
-                                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Variable</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-amber-400 h-2 rounded-full" style="width: 50%"></div>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">Préchargez vos cartes hors-ligne !</p>
+                        <div class="bg-amber-50 p-2 rounded border border-amber-100 text-xs">
+                            <strong>⚠️ En Rando :</strong> Signal OK près des remontées. Zones blanches fréquentes
+                            derrière les crêtes ou dans les gorges (WildeWasserWeg). Téléchargez vos cartes (Maps.me /
+                            Google) !
                         </div>
                     </div>
                 </div>
@@ -572,48 +593,57 @@
             </div>
         </section>
 
-        <!-- Section 4: Budget & Practical Info -->
+        <!-- Section 4: Budget & Vie Pratique -->
         <section>
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <span class="bg-amber-100 text-amber-600 p-2 rounded-lg text-xl">💰</span>
-                    Budget & Vie Pratique
+                    <span class="bg-amber-100 text-amber-600 p-2 rounded-lg text-xl">🥨</span>
+                    Vie Pratique & Budget
                 </h2>
                 <p class="text-gray-600 mt-2">
-                    Comparatif des prix moyens pour anticiper le budget.
+                    Alimentation, courses, et règles locales à connaître.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Cost Chart -->
-                <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
-                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Indice des Prix (Restaurant)</h3>
-                    <div class="chart-container">
-                        <canvas id="costChart"></canvas>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Tips Card -->
-                <div
-                    class="bg-gradient-to-br from-indigo-50 to-sky-50 rounded-xl shadow-md p-6 border border-indigo-100">
-                    <h3 class="text-lg font-bold text-indigo-800 mb-4">Astuces Économies</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <span class="text-2xl">💧</span>
-                            <div>
-                                <strong class="text-gray-800 text-sm">L'eau au resto</strong>
-                                <p class="text-xs text-gray-600">Demandez "Leitungswasser".</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-2xl">🏎️</span>
-                            <div>
-                                <strong class="text-gray-800 text-sm">Vignette Auto</strong>
-                                <p class="text-xs text-gray-600">ASFINAG numérique ~10€/10j.</p>
-                            </div>
+                <!-- Magasins -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">🛒 Magasins & Horaires</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><strong>Thalgau :</strong> Billa, Spar, Lidl sur place.</li>
+                        <li><strong>Neustift :</strong> Billa et Mpreis au village (Kampl).</li>
+                        <li class="bg-red-50 text-red-700 p-2 rounded text-xs border border-red-100">
+                            <strong>⚠️ Important :</strong> Ça ferme tôt le samedi (18h) et c'est <strong>FERMÉ le
+                                dimanche</strong>. Faites les courses le samedi matin !
                         </li>
                     </ul>
                 </div>
+
+                <!-- Restaurants -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">🍽️ Resto : Mode d'emploi</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><strong>Eau :</strong> Demandez <em>"Leitungswasser"</em> (robinet), sinon c'est payant.
+                        </li>
+                        <li><strong>Pourboire ("Trinkgeld") :</strong> OBLIGATOIRE (5-10%). Annoncez le TOTAL avant de
+                            payer. (Ex: addition 46€ ➔ Dites "50").</li>
+                        <li><strong>Horaires :</strong> On dîne tôt (18h30-19h30).</li>
+                        <li><strong>Prix :</strong> Schnitzel ~14€, Bière ~4-5€.</li>
+                    </ul>
+                </div>
+
+                <!-- Route -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">🛣️ Péages & Route</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><strong>Vignette Auto :</strong> OBLIGATOIRE sur autoroute (~10€/10j). À acheter avant la
+                            frontière ou en ligne (ASFINAG).</li>
+                        <li><strong>Péage Brenner :</strong> ~11€ en plus de la vignette (trajet retour).</li>
+                        <li><strong>Gilet/Triangle :</strong> Obligatoires à bord.</li>
+                    </ul>
+                </div>
+
             </div>
         </section>
 

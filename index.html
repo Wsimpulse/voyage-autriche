@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autriche 2026 - Tableau de Bord & Assistant IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F3F4F6;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0EA5E9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284C7;
+        }
+
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #E5E7EB;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #0EA5E9;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite;
+            /* Safari */
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Quiz Styles */
+        .quiz-option {
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-sky-600 to-indigo-700 text-white p-8 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🇦🇹 Roadtrip Autriche 2026</h1>
+            <p class="text-xl opacity-90 mb-8">Du 8 au 22 Août • 7 Voyageurs • De la Provence au Tyrol</p>
+
+            <!-- Key Stats Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+                    <div class="text-3xl font-bold text-amber-300">15</div>
+                    <div class="text-sm">Jours de Voyage</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+                    <div class="text-3xl font-bold text-sky-300">2</div>
+                    <div class="text-sm">Logements Principaux</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+                    <div class="text-3xl font-bold text-emerald-300">6+</div>
+                    <div class="text-sm">Randonnées Prévues</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-4">
+                    <div class="text-3xl font-bold text-indigo-300">3210m</div>
+                    <div class="text-sm">Altitude Max</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 md:p-8 space-y-12">
+
+        <!-- Introduction -->
+        <section class="bg-white rounded-xl shadow-md p-6 md:p-8 border-l-4 border-sky-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">🗺️ Vue d'ensemble du périple</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Ce voyage est conçu pour équilibrer découverte et repos pour une famille de 7 personnes (dont 3
+                enfants).
+                L'itinéraire traverse l'Italie du Nord pour rejoindre la région des lacs autrichiens (Salzkammergut),
+                avant de grimper vers les glaciers du Tyrol (Stubai).
+            </p>
+        </section>
+
+        <!-- ✨ AI FEATURES SECTION ✨ -->
+        <section id="ai-assistant" class="space-y-8">
+
+            <!-- ROW 1: Assistant & Translator -->
+            <div class="bg-gradient-to-br from-indigo-900 to-sky-900 rounded-2xl shadow-xl overflow-hidden text-white">
+                <div class="p-6 md:p-8 border-b border-indigo-700">
+                    <h2 class="text-2xl font-bold flex items-center gap-3">
+                        <span class="text-3xl">✨</span>
+                        Compagnon IA : Assistant & Traduction
+                        <span
+                            class="bg-indigo-500 text-xs px-2 py-1 rounded-full uppercase tracking-wider">Gemini</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <!-- Chatbot Column -->
+                    <div class="p-6 md:p-8 bg-white/5 border-r border-indigo-700/30">
+                        <h3 class="text-xl font-semibold mb-4 text-sky-300 flex items-center gap-2">
+                            <span>💬</span> Assistant Itinéraire
+                        </h3>
+                        <div id="chat-history"
+                            class="bg-slate-800/50 rounded-lg p-4 h-64 overflow-y-auto mb-4 text-sm space-y-3"
+                            aria-live="polite">
+                            <div class="bg-indigo-600/20 p-3 rounded-lg rounded-tl-none border border-indigo-500/30">
+                                Bonjour ! Je connais tout votre itinéraire (Thalgau, Neustift, les randonnées).
+                                Posez-moi une question !
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <label for="chat-input" class="sr-only">Votre message</label>
+                            <input type="text" id="chat-input" placeholder="Ex: Que faire s'il pleut à Thalgau ?"
+                                class="flex-1 bg-slate-700 border border-slate-600 text-white rounded-lg px-4 py-2 focus:outline-none focus:border-sky-500 placeholder-slate-400 focus:ring-2 focus:ring-sky-500">
+                            <button onclick="handleChat()" id="chat-btn" aria-label="Envoyer le message"
+                                class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg transition-colors flex items-center justify-center min-w-[50px] focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-900">
+                                <span id="chat-icon">➤</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Translator Column -->
+                    <div class="p-6 md:p-8 bg-white/5">
+                        <h3 class="text-xl font-semibold mb-4 text-emerald-300 flex items-center gap-2">
+                            <span>🗣️</span> Traducteur Vocal
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="trans-input"
+                                    class="text-xs text-indigo-300 uppercase font-semibold block mb-1">Français</label>
+                                <textarea id="trans-input" rows="2" placeholder="Ex: L'addition s'il vous plaît..."
+                                    class="w-full bg-slate-700 border border-slate-600 text-white rounded-lg px-4 py-2 focus:outline-none focus:border-emerald-500 placeholder-slate-400 focus:ring-2 focus:ring-emerald-500"></textarea>
+                            </div>
+
+                            <div class="flex justify-center">
+                                <button onclick="handleTranslate()" id="trans-btn"
+                                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full shadow-lg transition-transform transform active:scale-95 flex items-center gap-2 w-full justify-center focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-900">
+                                    <span>Traduire & Prononcer</span>
+                                    <span id="trans-loader"
+                                        class="loader hidden border-white border-t-transparent w-4 h-4"></span>
+                                </button>
+                            </div>
+
+                            <div id="trans-result-container" class="hidden" aria-live="polite">
+                                <label class="text-xs text-indigo-300 uppercase font-semibold">Allemand
+                                    (Autriche)</label>
+                                <div
+                                    class="bg-slate-800 p-4 rounded-lg border border-slate-600 mt-1 flex justify-between items-center">
+                                    <p id="trans-output" class="text-lg font-medium text-white italic">...</p>
+                                    <button onclick="playLastAudio()" class="text-sky-400 hover:text-sky-300 p-2"
+                                        aria-label="Réécouter la prononciation">
+                                        🔊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: Quiz & Packing List -->
+            <!-- ... (Already updated) ... -->
+
+            <!-- ... -->
+
+            <!-- API Key Modal -->
+            <div id="apiKeyModal"
+                class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden"
+                role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">🔑 Activation IA</h3>
+                    <p class="text-gray-600 mb-6">Pour utiliser l'Assistant, le Traducteur et le Quiz, veuillez entrer
+                        votre clé
+                        API Gemini.</p>
+
+                    <label for="apiKeyInput" class="sr-only">Votre Clé API</label>
+                    <input type="password" id="apiKeyInput" placeholder="Votre Clé API (AIza...)"
+                        class="w-full bg-gray-100 border border-gray-300 text-gray-800 rounded-lg px-4 py-3 mb-4 focus:ring-2 focus:ring-sky-500 outline-none transition-all">
+
+                    <div class="flex gap-4">
+                        <button onclick="saveApiKey()"
+                            class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 rounded-lg transition-colors focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+                            Activer
+                        </button>
+                        <button onclick="closeApiModal()"
+                            class="px-4 py-3 text-gray-500 hover:text-gray-700 font-medium focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 rounded-lg">
+                            Plus tard
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4 text-center">La clé est stockée uniquement dans votre
+                        navigateur.</p>
+                </div>
+            </div>
+
+            <!-- ROW 2: Quiz & Packing List -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Quiz Card -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="bg-amber-600 p-4 text-white flex justify-between items-center">
+                        <h3 class="text-lg font-bold flex items-center gap-2">
+                            <span>🧠</span> Quiz "Route des Alpes"
+                        </h3>
+                        <span class="text-xs bg-white/20 px-2 py-1 rounded">Pour les enfants</span>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4 text-sm">Générez une question amusante sur l'Autriche pour passer
+                            le temps en voiture !</p>
+
+                        <div id="quiz-container" class="hidden space-y-4" aria-live="polite">
+                            <p id="quiz-question" class="font-bold text-lg text-indigo-900 min-h-[60px]">...</p>
+                            <div id="quiz-options" class="space-y-2">
+                                <!-- Options injected here -->
+                            </div>
+                            <div id="quiz-feedback" class="hidden p-3 rounded-lg text-sm font-semibold"
+                                aria-live="assertive"></div>
+                        </div>
+
+                        <div class="mt-6 flex justify-center">
+                            <button onclick="generateQuiz()" id="quiz-btn"
+                                class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full shadow-md transition-all flex items-center gap-2 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
+                                <span>🎲 Nouvelle Question</span>
+                                <span id="quiz-loader"
+                                    class="loader hidden border-white border-t-transparent w-4 h-4"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Packing List Card -->
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="bg-emerald-600 p-4 text-white">
+                        <h3 class="text-lg font-bold flex items-center gap-2">
+                            <span>🎒</span> Générateur de Valise
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4 text-sm">Vous ne savez pas quoi emporter pour demain ? Demandez à
+                            l'IA !</p>
+
+                        <div class="flex gap-2 mb-4">
+                            <label for="pack-context" class="sr-only">Choisir un scénario</label>
+                            <select id="pack-context"
+                                class="flex-1 bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block p-2.5">
+                                <option value="Randonnée en montagne (froid)">Randonnée Glacier</option>
+                                <option value="Baignade au lac">Baignade Lac</option>
+                                <option value="Visite ville (Salzbourg)">Visite Ville</option>
+                                <option value="Long trajet voiture avec bébé">Trajet Voiture</option>
+                            </select>
+                            <button onclick="generatePacking()" id="pack-btn" aria-label="Générer la liste"
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                                <span id="pack-icon">Go</span>
+                            </button>
+                        </div>
+
+                        <div id="pack-result"
+                            class="bg-gray-50 rounded-lg p-4 text-sm text-gray-700 min-h-[150px] border border-gray-200"
+                            aria-live="polite">
+                            <p class="text-gray-400 italic text-center mt-8">La liste apparaîtra ici...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 1: Driving Statistics -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-indigo-100 text-indigo-600 p-2 rounded-lg text-xl">🚗</span>
+                    Analyse des Trajets
+                </h2>
+                <p class="text-gray-600 mt-2">
+                    Le voyage est découpé en étapes pour éviter les journées trop longues.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-4 md:p-8">
+                <div class="chart-container">
+                    <canvas id="drivingChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Timeline Itinerary -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+                <span class="bg-sky-100 text-sky-600 p-2 rounded-lg text-xl">📅</span>
+                Chronologie du Séjour
+            </h2>
+
+            <div class="relative timeline-line space-y-8">
+                <!-- Timeline Steps -->
+                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
+                    <div
+                        class="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
+                        08</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-indigo-500">
+                        <h3 class="font-bold text-lg text-indigo-700">Départ & Etape 1</h3>
+                        <p class="text-sm text-gray-600">Trets ➔ Lac de Garde / Vérone</p>
+                    </div>
+                    <div class="hidden md:block w-5/12"></div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
+                    <div class="hidden md:block w-5/12"></div>
+                    <div
+                        class="bg-sky-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
+                        09</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 mr-auto md:mr-0 border-t-4 border-sky-500">
+                        <h3 class="font-bold text-lg text-sky-700">Arrivée Thalgau</h3>
+                        <p class="text-sm text-gray-600">Vérone ➔ Thalgau (Salzbourg)</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
+                    <div
+                        class="bg-emerald-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
+                        15</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-emerald-500">
+                        <h3 class="font-bold text-lg text-emerald-700">Transition Tyrol</h3>
+                        <p class="text-sm text-gray-600">Thalgau ➔ Neustift im Stubaital</p>
+                    </div>
+                    <div class="hidden md:block w-5/12"></div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
+                    <div class="hidden md:block w-5/12"></div>
+                    <div
+                        class="bg-amber-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
+                        21</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 mr-auto md:mr-0 border-t-4 border-amber-500">
+                        <h3 class="font-bold text-lg text-amber-700">Retour & Etape 2</h3>
+                        <p class="text-sm text-gray-600">Neustift ➔ Plaisance (Piacenza)</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center md:justify-between gap-4">
+                    <div
+                        class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white shrink-0">
+                        22</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full md:w-5/12 ml-auto md:ml-0 border-t-4 border-gray-600">
+                        <h3 class="font-bold text-lg text-gray-800">Retour Maison</h3>
+                        <p class="text-sm text-gray-600">Plaisance ➔ Trets</p>
+                    </div>
+                    <div class="hidden md:block w-5/12"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Hiking Analysis -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-600 p-2 rounded-lg text-xl">🥾</span>
+                    Challenge Randonnée
+                </h2>
+                <p class="text-gray-600 mt-2">
+                    Comparaison des distances et altitudes (Thalgau vs Neustift).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Distances Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Distances (km)</h3>
+                    <div class="chart-container">
+                        <canvas id="hikingDistChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Altitude Context -->
+                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Profil d'Altitude</h3>
+                    <div class="chart-container flex-grow">
+                        <canvas id="altitudeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Network & Connectivity -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-sky-100 text-sky-600 p-2 rounded-lg text-xl">📡</span>
+                    Connectivité & Réseau
+                </h2>
+                <p class="text-gray-600 mt-2">
+                    Restez connectés pendant tout le voyage.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Roaming Info -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-sky-500">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">🇪🇺 Roaming UE (Gratuit)</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Grâce au principe "Roam Like at Home", votre forfait français fonctionne en Autriche
+                        <strong>sans surcoût</strong> (Appels, SMS, Internet).
+                    </p>
+                    <ul class="text-sm space-y-2 text-gray-600">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> 4G/5G comme en France
+                        </li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔</span> Pas de configuration
+                            requise</li>
+                        <li class="flex items-center gap-2"><span class="text-amber-500">⚠</span> Vérifiez votre "Fair
+                            Use" (quota data étranger)</li>
+                    </ul>
+                </div>
+
+                <!-- Coverage Details -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-indigo-500">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">📶 Couverture Mobile</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-sm">Thalgau (Lacs)</span>
+                                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Excellent
+                                    (4G/5G)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-sm">Neustift (Village)</span>
+                                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Très Bon (4G)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-semibold text-sm">Glaciers / Rando</span>
+                                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Variable</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-amber-400 h-2 rounded-full" style="width: 50%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Préchargez vos cartes hors-ligne !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Budget & Practical Info -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <span class="bg-amber-100 text-amber-600 p-2 rounded-lg text-xl">💰</span>
+                    Budget & Vie Pratique
+                </h2>
+                <p class="text-gray-600 mt-2">
+                    Comparatif des prix moyens pour anticiper le budget.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cost Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Indice des Prix (Restaurant)</h3>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tips Card -->
+                <div
+                    class="bg-gradient-to-br from-indigo-50 to-sky-50 rounded-xl shadow-md p-6 border border-indigo-100">
+                    <h3 class="text-lg font-bold text-indigo-800 mb-4">Astuces Économies</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-2xl">💧</span>
+                            <div>
+                                <strong class="text-gray-800 text-sm">L'eau au resto</strong>
+                                <p class="text-xs text-gray-600">Demandez "Leitungswasser".</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-2xl">🏎️</span>
+                            <div>
+                                <strong class="text-gray-800 text-sm">Vignette Auto</strong>
+                                <p class="text-xs text-gray-600">ASFINAG numérique ~10€/10j.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 py-8 mt-8 border-t border-gray-200">
+            <p>© 2026 Carnet de Route Autriche. Généré pour votre famille.</p>
+        </footer>
+
+    </main>
+
+
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden" role="dialog"
+        aria-modal="true" aria-labelledby="modal-title">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">🔑 Activation IA</h3>
+            <p class="text-gray-600 mb-6">Pour utiliser l'Assistant, le Traducteur et le Quiz, veuillez entrer votre clé
+                API Gemini.</p>
+
+            <label for="apiKeyInput" class="sr-only">Votre Clé API</label>
+            <input type="password" id="apiKeyInput" placeholder="Votre Clé API (AIza...)"
+                class="w-full bg-gray-100 border border-gray-300 text-gray-800 rounded-lg px-4 py-3 mb-4 focus:ring-2 focus:ring-sky-500 outline-none transition-all">
+
+            <div class="flex gap-4">
+                <button onclick="saveApiKey()"
+                    class="flex-1 bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 rounded-lg transition-colors focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+                    Activer
+                </button>
+                <button onclick="closeApiModal()"
+                    class="px-4 py-3 text-gray-500 hover:text-gray-700 font-medium focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 rounded-lg">
+                    Plus tard
+                </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-4 text-center">La clé est stockée uniquement dans votre navigateur.</p>
+        </div>
+    </div>
+
+    <!-- Floating Action Button for Settings -->
+    <button onclick="openApiModal()"
+        class="fixed bottom-6 right-6 bg-slate-800 text-white p-4 rounded-full shadow-lg hover:bg-slate-700 transition-all z-40"
+        aria-label="Paramètres IA">
+        ⚙️
+    </button>
+
+    <!-- GEMINI API INTEGRATION LOGIC -->
+    <script>
+        let apiKey = sessionStorage.getItem('gemini_api_key') || "";
+
+        function openApiModal() {
+            document.getElementById('apiKeyModal').classList.remove('hidden');
+        }
+
+        function closeApiModal() {
+            document.getElementById('apiKeyModal').classList.add('hidden');
+        }
+
+        function saveApiKey() {
+            const input = document.getElementById('apiKeyInput');
+            const key = input.value.trim();
+            if (key) {
+                apiKey = key;
+                sessionStorage.setItem('gemini_api_key', key);
+                closeApiModal();
+                alert("Clé API enregistrée ! Les fonctionnalités IA sont actives.");
+            }
+        }
+
+        // Show modal on load if no key is present
+        window.addEventListener('load', () => {
+            if (!apiKey) {
+                // Optional: Auto-open modal or simple distinctive usage
+                setTimeout(openApiModal, 2000);
+            }
+        });
+
+        let lastAudioBase64 = null;
+        let currentQuizAnswer = "";
+
+        // System prompt for the Trip Assistant
+        const tripContext = `
+            You are a helpful and cheerful travel assistant for a French family of 7 (including 3 children: baby, 7yo, 10yo) traveling to Austria in August 2026.
+            
+            Key Itinerary Details:
+            - Dates: Aug 8 - Aug 22, 2026.
+            - Stop 1: Thalgau (Salzkammergut/Lakes region) - Aug 9 to 15. Near Salzburg, Fuschlsee, Wolfgangsee.
+            - Stop 2: Neustift im Stubaital (Tyrol/Glaciers) - Aug 15 to 21. Near Innsbruck, Stubai Glacier.
+            
+            Your personality:
+            - Answer in French.
+            - Be concise but warm.
+            - If asked about activities, prioritize kid-friendly options (stroller accessible or fun for 7-10yo).
+            - You know about: Hiking, Hallstatt (crowded), Austrian food (Schnitzel, Kaiserschmarrn), and practical tips (shops close Sundays).
+        `;
+
+        // --- Helper: Call Gemini Text Generation ---
+        async function callGeminiText(prompt, systemInstruction = "") {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Désolé, je n'ai pas pu répondre.";
+            } catch (error) {
+                console.error("Gemini Text Error:", error);
+                return "Erreur de connexion à l'IA.";
+            }
+        }
+
+        // --- Helper: Call Gemini TTS ---
+        async function callGeminiTTS(textToSpeak) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: textToSpeak }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Fenrir" }
+                        }
+                    }
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+            } catch (error) {
+                console.error("Gemini TTS Error:", error);
+                return null;
+            }
+        }
+
+        // --- Feature 1: Chatbot Handler ---
+        async function handleChat() {
+            const input = document.getElementById('chat-input');
+            const history = document.getElementById('chat-history');
+            const btn = document.getElementById('chat-btn');
+            const userText = input.value.trim();
+
+            if (!userText) return;
+
+            const userMsg = document.createElement('div');
+            userMsg.className = "bg-sky-600/20 p-3 rounded-lg rounded-tr-none border border-sky-500/30 ml-auto max-w-[85%] text-right";
+            userMsg.textContent = userText;
+            history.appendChild(userMsg);
+            input.value = "";
+            btn.innerHTML = `<div class="loader w-4 h-4 border-white border-t-transparent"></div>`;
+            history.scrollTop = history.scrollHeight;
+
+            const aiResponseText = await callGeminiText(userText, tripContext);
+
+            const aiMsg = document.createElement('div');
+            aiMsg.className = "bg-indigo-600/20 p-3 rounded-lg rounded-tl-none border border-indigo-500/30 mr-auto max-w-[90%]";
+            aiMsg.innerHTML = marked.parse(aiResponseText);
+            history.appendChild(aiMsg);
+            history.scrollTop = history.scrollHeight;
+            btn.innerHTML = `<span id="chat-icon">➤</span>`;
+        }
+
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleChat();
+        });
+
+        // --- Feature 2: Translator + TTS ---
+        async function handleTranslate() {
+            const input = document.getElementById('trans-input');
+            const output = document.getElementById('trans-output');
+            const container = document.getElementById('trans-result-container');
+            const btnLoader = document.getElementById('trans-loader');
+            const userText = input.value.trim();
+
+            if (!userText) return;
+
+            btnLoader.classList.remove('hidden');
+
+            const translatePrompt = `Translate the following French text to Austrian German. Return ONLY the translation. Text: "${userText}"`;
+            const germanText = await callGeminiText(translatePrompt);
+
+            output.textContent = germanText;
+            container.classList.remove('hidden');
+
+            const audioPrompt = `Sag auf Deutsch: ${germanText}`;
+            lastAudioBase64 = await callGeminiTTS(audioPrompt);
+
+            btnLoader.classList.add('hidden');
+            if (lastAudioBase64) playLastAudio();
+        }
+
+        function playLastAudio() {
+            if (!lastAudioBase64) return;
+            const pcmData = atob(lastAudioBase64);
+            const arrayBuffer = new ArrayBuffer(pcmData.length);
+            const view = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < pcmData.length; i++) view[i] = pcmData.charCodeAt(i);
+
+            const wavHeader = new ArrayBuffer(44);
+            const viewHeader = new DataView(wavHeader);
+            const writeString = (view, offset, string) => {
+                for (let i = 0; i < string.length; i++) view.setUint8(offset + i, string.charCodeAt(i));
+            };
+            writeString(viewHeader, 0, 'RIFF');
+            viewHeader.setUint32(4, 36 + view.length, true);
+            writeString(viewHeader, 8, 'WAVE');
+            writeString(viewHeader, 12, 'fmt ');
+            viewHeader.setUint32(16, 16, true);
+            viewHeader.setUint16(20, 1, true);
+            viewHeader.setUint16(22, 1, true);
+            viewHeader.setUint32(24, 24000, true);
+            viewHeader.setUint32(28, 24000 * 2, true);
+            viewHeader.setUint16(32, 2, true);
+            viewHeader.setUint16(34, 16, true);
+            writeString(viewHeader, 36, 'data');
+            viewHeader.setUint32(40, view.length, true);
+
+            const blob = new Blob([viewHeader, view], { type: 'audio/wav' });
+            const url = URL.createObjectURL(blob);
+            const audio = new Audio(url);
+            audio.play();
+        }
+
+        // --- Feature 3: Quiz Generator ---
+        async function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            const qText = document.getElementById('quiz-question');
+            const optsDiv = document.getElementById('quiz-options');
+            const feedback = document.getElementById('quiz-feedback');
+            const loader = document.getElementById('quiz-loader');
+
+            // Reset UI
+            container.classList.remove('hidden');
+            optsDiv.innerHTML = '';
+            feedback.classList.add('hidden');
+            qText.innerText = "Génération de la question...";
+            loader.classList.remove('hidden');
+
+            const prompt = `Generate a fun trivia question about Austria suitable for a 10 year old child. 
+            Respond strictly in this JSON format:
+            {
+                "question": "The question text in French",
+                "options": ["Option A (French)", "Option B (French)", "Option C (French)"],
+                "correctIndex": 0,
+                "explanation": "Short explanation in French"
+            }`;
+
+            try {
+                const text = await callGeminiText(prompt);
+                // Clean markdown code blocks if present
+                const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim();
+                const data = JSON.parse(jsonStr);
+
+                qText.innerText = data.question;
+                currentQuizAnswer = data.correctIndex;
+
+                data.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-amber-50 hover:border-amber-300 quiz-option bg-white shadow-sm";
+                    btn.innerText = opt;
+                    btn.onclick = () => checkQuiz(idx, btn, data.correctIndex, data.explanation);
+                    optsDiv.appendChild(btn);
+                });
+
+            } catch (e) {
+                console.error(e);
+                qText.innerText = "Oups, je n'ai pas réussi à inventer une question. Réessaie !";
+            }
+            loader.classList.add('hidden');
+        }
+
+        function checkQuiz(selectedIndex, btn, correctIndex, explanation) {
+            const feedback = document.getElementById('quiz-feedback');
+            const opts = document.getElementById('quiz-options').children;
+
+            // Disable all buttons
+            for (let b of opts) b.disabled = true;
+
+            feedback.classList.remove('hidden');
+
+            if (selectedIndex === correctIndex) {
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                feedback.className = "p-3 rounded-lg text-sm font-semibold bg-green-100 text-green-800 border border-green-200";
+                feedback.innerHTML = `✅ Bravo ! ${explanation}`;
+            } else {
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                // Highlight correct
+                opts[correctIndex].classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                feedback.className = "p-3 rounded-lg text-sm font-semibold bg-red-100 text-red-800 border border-red-200";
+                feedback.innerHTML = `❌ Pas tout à fait. ${explanation}`;
+            }
+        }
+
+        // --- Feature 4: Packing List Generator ---
+        async function generatePacking() {
+            const context = document.getElementById('pack-context').value;
+            const resDiv = document.getElementById('pack-result');
+            const btn = document.getElementById('pack-btn');
+
+            resDiv.innerHTML = '<div class="flex justify-center p-4"><div class="loader w-6 h-6 border-emerald-500 border-t-transparent"></div></div>';
+
+            const prompt = `Génère une liste (HTML <ul> avec <li>) de 5-6 objets indispensables à mettre dans le sac pour ce scénario précis en Autriche en août : "${context}". 
+            Famille : Parents + 10 ans, 7 ans, bébé.
+            Réponds uniquement avec le code HTML de la liste. Ajoute des emojis.`;
+
+            const listHtml = await callGeminiText(prompt);
+
+            // Basic cleanup to ensure we just get the list content if possible
+            resDiv.innerHTML = listHtml.replace(/```html/g, '').replace(/```/g, '');
+        }
+
+    </script>
+
+    <!-- Chart Logic -->
+    <script>
+        // --- Shared Configuration ---
+        const colorPrimary = '#0EA5E9';
+        const colorSecondary = '#6366F1';
+        const colorAccent = '#F59E0B';
+        const colorSuccess = '#10B981';
+
+        const wrapLabel = (str, maxLen = 16) => {
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipPlugin = {
+            tooltip: {
+                callbacks: {
+                    title: function (tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        };
+
+        // Charts Init
+        new Chart(document.getElementById('drivingChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Trets > Etape 1', 'Etape 1 > Thalgau', 'Thalgau > Neustift', 'Neustift > Etape 2', 'Etape 2 > Trets'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Heures',
+                    data: [6.5, 4.0, 2.0, 4.5, 5.0],
+                    backgroundColor: [colorSecondary, colorPrimary, colorSuccess, colorPrimary, colorSecondary],
+                    borderRadius: 6,
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { ...tooltipPlugin, legend: { display: false } } }
+        });
+
+        new Chart(document.getElementById('hikingDistChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Tour Fuschlsee', 'Alpage Postalm', 'Schafberg', 'WildeWasserWeg', 'Schlick 2000', 'Mieders Plateau'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'km',
+                    data: [11.5, 8.5, 5.0, 6.0, 5.5, 7.0],
+                    backgroundColor: colorSuccess,
+                    borderRadius: 4,
+                    indexAxis: 'y'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { ...tooltipPlugin, legend: { display: false } } }
+        });
+
+        new Chart(document.getElementById('altitudeChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Thalgau (Lac)', 'Neustift (Village)', 'Schafberg (Sommet)', 'Top of Tyrol (Glacier)'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Altitude (m)',
+                    data: [550, 990, 1783, 3210],
+                    borderColor: colorSecondary,
+                    backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { ...tooltipPlugin, legend: { display: false } } }
+        });
+
+        new Chart(document.getElementById('costChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Plat Principal', 'Bière/Soda', 'Café'].map(l => wrapLabel(l)),
+                datasets: [
+                    { label: 'France', data: [18, 6.5, 2.2], backgroundColor: '#9CA3AF' },
+                    { label: 'Autriche', data: [15, 4.5, 3.2], backgroundColor: colorAccent }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { ...tooltipPlugin } }
+        });
+    </script>
+</body>
+
+</html>

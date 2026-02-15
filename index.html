@@ -601,7 +601,12 @@
 
     <!-- GEMINI API INTEGRATION LOGIC -->
     <script>
-        let apiKey = sessionStorage.getItem('gemini_api_key') || "";
+        // 🚨 CONFIGURATION FAMILLE 🚨
+        // Collez votre clé ici (entre les guillemets) pour que tout le monde puisse l'utiliser sans rien saisir.
+        // Ex: const defaultKey = "AIzaSyD...";
+        const defaultKey = "AIzaSyAFiW49niZYdxI7l1wwck8UfjNWcD2doyY";
+
+        let apiKey = sessionStorage.getItem('gemini_api_key') || defaultKey || "";
 
         function openApiModal() {
             document.getElementById('apiKeyModal').classList.remove('hidden');
@@ -618,14 +623,13 @@
                 apiKey = key;
                 sessionStorage.setItem('gemini_api_key', key);
                 closeApiModal();
-                alert("Clé API enregistrée ! Les fonctionnalités IA sont actives.");
+                alert("Clé API enregistrée !");
             }
         }
 
-        // Show modal on load if no key is present
+        // Show modal on load ONLY if no key is present (neither stored nor default)
         window.addEventListener('load', () => {
             if (!apiKey) {
-                // Optional: Auto-open modal or simple distinctive usage
                 setTimeout(openApiModal, 2000);
             }
         });
